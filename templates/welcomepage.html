@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>welcome page</title>
+</head>
+<body>
+<h2> welcome student management system</h2>
+
+<form action="/saveschool/" method="post">
+    {% csrf_token %}
+<table align="center" border="2"><tr><th>Signup for schools</th>
+
+<tr><th>School name:<input type="text" name="sn" required placeholder="School name"> </th></tr>
+<tr><th>School pwd:<input type="text" name="pwd" required placeholder="School pwd"> </th></tr>
+<tr><th>School Location:<input type="text" name="sl" required placeholder="School Location"> </th></tr>
+<tr><th><button type="submit">Signup</button> </th></tr>
+</table>
+</form>
+<br><br>
+<form action="/schoolcheck/" method="post">
+    {% csrf_token %}
+
+<table align="center" border="2"><tr><th>Signin for schools</th>
+
+<tr><th>Select your school id no
+    <select name="sid">
+    {% for x in data %}
+     <option value="{{ x.school_id }}">
+    {{ x.school_id }}
+        </option>
+    {% endfor %}
+    </select>
+    </th>
+    </tr>
+<tr><th>School password<input type="text" name="spwd" placeholder="Password"  required></th></tr>
+<tr><th><button type="submit">Signup</button> </th></tr>
+</table>
+</form>
+<br>
+<br>
+
+<form action="/signupstudent/" method="post">
+    {% csrf_token %}
+
+<table align="center" border="2"><tr><th>Signup for Students</th>
+<tr><th>Student name:<input type="text" name="sname"required placeholder="Student Name" ></th></tr>
+<tr><th>Student pwd:<input type="text" name="spwd"required placeholder="Student Password" ></th></tr>
+<tr><th>Student age:<input type="number" name="sage"required placeholder="Student age" ></th></tr>
+<tr><th>Student ContactNo:<input type="number" name="scno"required placeholder="Student ContactNo" ></th></tr>
+<tr><th>Student gender:<input type="radio" name="sgen" checked value="male">Male <input type="radio" name="sgen" value="Female">Female </th></tr>
+<tr><th>Select your school name
+    <select name="sid">
+    {% for x in data %}
+     <option value="{{ x.school_id }}">{{ x.school_name }}
+        </option>
+    {% endfor %}
+    </select>
+    </th>
+    </tr>
+<tr><th><button type="submit">Signup</button> </th></tr>
+</table>
+</form>
+<br>
+
+<form action="/studenctcheck/" method="post">
+    {% csrf_token %}
+
+<table align="center" border="2">
+    <tr>
+        <th>Sign in for students:</th>
+    </tr>
+    <tr>
+        <th>student name
+            <input type="text" name="sname" placeholder="Student Name" required>
+        </th>
+    </tr>
+    <tr><th>Student password<input type="password" name="spwd" placeholder="password" required></th></tr>
+    <tr><th>
+        <select name="sclname"> Select Your school
+
+            {% for x in data %}
+                <option value="{{ x.school_id }}">
+                {{ x.school_name}}
+                </option>
+            {% endfor %}
+        </option>
+        </select>
+    </th></tr>
+<tr><th><button type="submit"> Login</button> </th></tr>
+</table>
+</form>
+
+<br>
+<br>
+<table align="center" border="2">
+    <tr>
+        <th>School Id</th>
+        <th>School Name</th>
+        <th>School Locatio</th>
+
+        <th>Options</th>
+    </tr>
+    {% for x in data %}
+    <tr>
+        <th>{{ x.school_id }}</th>
+        <th>{{ x.school_name }}</th>
+        <th>{{ x.school_place }}</th>
+        <th><a href="">Signin</a></th>
+    </tr>
+{% endfor %}
+</table>
+</body>
+</html>
